@@ -1,5 +1,6 @@
+package ries.dan;
+
 import org.apache.commons.io.IOUtils;
-import java.io.IOException;
 
 public class Main {
 
