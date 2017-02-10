@@ -16,4 +16,20 @@ public class GroceryItem {
         this.type = type;
         this.expirationDate = expirationDate;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
 }

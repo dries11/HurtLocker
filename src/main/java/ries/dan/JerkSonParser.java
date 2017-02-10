@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Created by danries on 2/8/17.
  */
-public class JerkSonParser extends HashMap<String,ArrayList<GroceryItem>>{
+public class JerkSonParser{
 
     public int errorCounter;
 
@@ -47,7 +47,12 @@ public class JerkSonParser extends HashMap<String,ArrayList<GroceryItem>>{
             nameOfItem.replaceFirst("");
 
             while(priceOfItem.find() && nameOfItem.find() && dateOfItem.find() && typeOfItem.find()){
-                itemName = nameOfItem.group();
+                if (nameOfItem.group().matches("(c)[O0oo]{2}kies")){
+                    itemName = "cookies";
+                }
+                else{
+                    itemName = nameOfItem.group();
+                }
                 itemPrice = priceOfItem.group();
                 itemType = typeOfItem.group().split(":");
                 typer = itemType[1];
@@ -60,16 +65,4 @@ public class JerkSonParser extends HashMap<String,ArrayList<GroceryItem>>{
         return list;
     }
 
-    public void insertItemsIntoMap(ArrayList<GroceryItem> groceryItems){
-        for (GroceryItem item : groceryItems){
-            if (this.containsKey(item.name)){
-                this.get(item.name).add(item);
-            }
-            else{
-                ArrayList<GroceryItem> items = new ArrayList<GroceryItem>();
-                items.add(item);
-                this.put(item.name,items);
-            }
-        }
-    }
 }
