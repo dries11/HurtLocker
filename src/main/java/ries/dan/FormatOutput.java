@@ -19,8 +19,12 @@ public class FormatOutput {
         return stringBuilder.toString();
     }
 
-    public ArrayList<String> turnDataIntoOneString(HashMap<String, Integer> timesItemSeen, HashMap<String, Integer> timesPriceSeen, HashMap<String, ArrayList<String>> differentPricesSeen){
-        
+    public ArrayList<String[]> turnDataIntoOneString(HashMap<String, Integer> timesItemSeen, HashMap<String, Integer> timesPriceSeen, HashMap<String, ArrayList<String>> differentPricesSeen){
+        ArrayList<String[]> itemsInfo = new ArrayList<String[]>();
+        for (String key : timesItemSeen.keySet()){
+
+        }
+        return null;
     }
 
 }
