@@ -83,6 +83,23 @@ public class GroceryEngine extends HashMap<String,ArrayList<GroceryItem>>{
         return timesSeen;
     }
 
+    public HashMap<String, Integer> getTimesPricesSeen(){
+        HashMap<String, Integer> timesPricesSeen = new HashMap<String, Integer>();
+        for (String items : this.keySet()){
+            for (GroceryItem item : this.get(items)){
+                if (timesPricesSeen.containsKey(item.getPrice())){
+                    int times = timesPricesSeen.get(item.getPrice());
+                    times++;
+                    timesPricesSeen.put(item.getPrice(),times);
+                }
+                else{
+                    timesPricesSeen.put(item.getPrice(),1);
+                }
+            }
+        }
+        return timesPricesSeen;
+    }
+
     public int getErrorCounter(){
         return this.errorCounter;
     }

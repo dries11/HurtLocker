@@ -65,4 +65,7 @@ public class JerkSonParser{
         return list;
     }
 
+    public int getErrorCounter() {
+        return errorCounter;
+    }
 }
