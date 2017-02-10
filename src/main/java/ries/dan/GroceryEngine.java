@@ -46,7 +46,42 @@ public class GroceryEngine extends HashMap<String,ArrayList<GroceryItem>>{
         return null;
     }
 
+    public HashMap<String, ArrayList<String>> getPricesSeen(){
 
+        ArrayList<String> pricesSeen = new ArrayList<String>();
+        HashMap<String, ArrayList<String>> itemPrices = new HashMap<String, ArrayList<String>>();
+
+        for (String items : this.keySet()){
+            for (GroceryItem item : this.get(items)){
+                if (itemPrices.containsKey(items)){
+                    itemPrices.get(items).add(item.getPrice());
+                }
+                else{
+                    pricesSeen.add(item.getPrice());
+                    itemPrices.put(items,pricesSeen);
+                }
+            }
+
+        }
+        return itemPrices;
+    }
+
+    public HashMap<String, Integer> getTimesItemSeen(){
+        HashMap<String,Integer> timesSeen = new HashMap<String, Integer>();
+        for (String items : this.keySet()){
+            for (GroceryItem item : this.get(items)){
+                if (timesSeen.containsKey(items)){
+                    int times = timesSeen.get(items);
+                    times++;
+                    timesSeen.put(items,times);
+                }
+                else{
+                    timesSeen.put(items,1);
+                }
+            }
+        }
+        return timesSeen;
+    }
 
     public int getErrorCounter(){
         return this.errorCounter;
