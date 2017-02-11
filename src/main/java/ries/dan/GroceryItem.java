@@ -5,10 +5,10 @@ package ries.dan;
  */
 public class GroceryItem {
 
-    public String name;
-    public String price;
-    public String type;
-    public String expirationDate;
+    private String name;
+    private String price;
+    private String type;
+    private String expirationDate;
 
     public GroceryItem(String name, String price, String type, String expirationDate) {
         this.name = name;

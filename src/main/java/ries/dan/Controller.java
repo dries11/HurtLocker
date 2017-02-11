@@ -12,21 +12,27 @@ public class Controller {
 
     JerkSonParser jerkSonParser = new JerkSonParser();
     GroceryEngine groceryEngine = new GroceryEngine();
+    FormatOutput formatOutput = new FormatOutput();
 
-    public void run(String file) throws KeyNotAssociatedWithValueException{
+    public void run(String file) throws Exception{
 
         ArrayList<String[]> parsed = new ArrayList<String[]>();
+        ArrayList<GroceryItem> groceryItems = new ArrayList<GroceryItem>();
         HashMap<String, ArrayList<String >> pricesSeen = new HashMap<String, ArrayList<String>>();
         HashMap<String, Integer> timesItemsSeen = new HashMap<String, Integer>();
         HashMap<String, Integer> timesPricesSeen = new HashMap<String, Integer>();
 
-        parsed = jerkSonParser.parseStrings(jerkSonParser.splitFileIntoParts(file));
 
-        groceryEngine.insertItemsIntoMap(groceryEngine.createGroceryItems(parsed));
+        String[] split =  jerkSonParser.splitFileIntoParts(file);
 
-        pricesSeen = groceryEngine.getPricesSeen();
-        timesItemsSeen = groceryEngine.getTimesItemSeen();
-        timesPricesSeen = groceryEngine.getTimesPricesSeen();
+        parsed = jerkSonParser.parseStrings(split);
+
+        groceryItems = groceryEngine.createGroceryItems(parsed);
+
+        groceryEngine.insertItemsIntoMap(groceryItems);
+
+        formatOutput.output(groceryEngine);
+        System.out.println("Errors Seen: " + groceryEngine.errorCounter + " times" );
 
 
 

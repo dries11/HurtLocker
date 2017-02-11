@@ -32,7 +32,7 @@ public class JerkSonParser{
 
         Pattern price = Pattern.compile("(\\d+)\\.(\\d+)");
         Pattern date = Pattern.compile("(\\d+)/(\\d+)/(\\d+)");
-        Pattern name = Pattern.compile("[A-Za-z]+");
+        Pattern name = Pattern.compile("[A-Za-z\\d]+");
         Pattern type = Pattern.compile("(type:)\\w+");
 
         int i = 0;
@@ -47,19 +47,34 @@ public class JerkSonParser{
             nameOfItem.replaceFirst("");
 
             while(priceOfItem.find() && nameOfItem.find() && dateOfItem.find() && typeOfItem.find()){
-                if (nameOfItem.group().matches("(c)[O0oo]{2}kies")){
+                if (nameOfItem.group().matches("(?i)c.+s")){
                     itemName = "cookies";
                 }
                 else{
                     itemName = nameOfItem.group();
                 }
+
                 itemPrice = priceOfItem.group();
                 itemType = typeOfItem.group().split(":");
                 typer = itemType[1];
                 expirationDate = dateOfItem.group();
             }
-            String[] itemInfo = new String[]{itemName,itemPrice,typer,expirationDate};
-            list.add(itemInfo);
+            if (itemName.equals("price") || itemName.equals("name") || itemPrice.equals("type") || itemName.equals("")){
+                errorCounter++;
+                itemName = "";
+                itemPrice = "";
+                typer = "";
+                expirationDate = "";
+            }
+            else{
+                String[] itemInfo = new String[]{itemName,itemPrice,typer,expirationDate};
+                list.add(itemInfo);
+                itemName = "";
+                itemPrice = "";
+                typer = "";
+                expirationDate = "";
+            }
+
 
         }
         return list;
